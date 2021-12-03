@@ -1,3 +1,5 @@
+
+/* DDL */
 /* criar banco de dados */
 create db_clinica ;
 
@@ -11,7 +13,9 @@ create table tb_paciente(
     nome char(100),
     telefone int,
     email char(30),
-    dt_nascimento date
+    dt_nascimento date,
+    cd_convenio int,
+    cd_exame int
 
     ); 
 
@@ -22,8 +26,9 @@ create table tb_medico(
     nome char(100),
     telefone int,
     email char(30),
-    especialidade char (30)
+    especialidade  char(30)
 );
+
 
 /* criar a tabela Paciente */
 create table tb_exame(
@@ -43,13 +48,14 @@ create table tb_convenio(
 /* *** RELACIONAMENTOS  *** */
 
 /* o Paciente realiza exames */
-alter table tb_paciente
-add constraint fk_exame foreign key(cd_exame)
-references  tb_exame (cd_exame)
+alter table tb_paciente; 
+add constraint fk_exame foreign key(cd_exame);
+references  tb_exame (cd_exame);
 
 /* o Paciente possui convenio */
-alter table tb_paciente
-add constraint fk_convenio foreign key(cd_convenio)
-references tb_convenio (cd_convenio)
+alter table tb_paciente;
+add constraint fk_convenio foreign key(cd_convenio);
+references tb_convenio (cd_convenio);
+
 
 
