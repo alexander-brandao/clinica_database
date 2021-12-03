@@ -48,13 +48,13 @@ create table tb_convenio(
 /* *** RELACIONAMENTOS  *** */
 
 /* o Paciente realiza exames */
-alter table tb_paciente; 
-add constraint fk_exame foreign key(cd_exame);
+alter table tb_paciente
+add constraint fk_exame foreign key(cd_exame)
 references  tb_exame (cd_exame);
 
 /* o Paciente possui convenio */
-alter table tb_paciente;
-add constraint fk_convenio foreign key(cd_convenio);
+alter table tb_paciente
+add constraint fk_convenio foreign key(cd_convenio)
 references tb_convenio (cd_convenio);
 
 
