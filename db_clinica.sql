@@ -4,6 +4,7 @@ create db_clinica ;
 /*usar o banco */
 use db_clinica ;
 
+/* ***ENTIDADES*** */
 /* criar a tabela Paciente */
 create table tb_paciente(
     cpf int not null primary key,
@@ -11,11 +12,14 @@ create table tb_paciente(
     telefone int,
     email char(30),
     dt_nascimento date
+
     ); 
 
 /* criar a tabela Paciente */
 create table tb_medico(
-    crm int not null primary key,
+    cd_medico int not null primary key,
+    crm int,
+    nome char(100),
     telefone int,
     email char(30),
     especialidade char (30)
@@ -23,7 +27,7 @@ create table tb_medico(
 
 /* criar a tabela Paciente */
 create table tb_exame(
-    numero int not null primary key,
+    cd_exame int not null primary key,
     nome char(50),
     descricao char(200),
     valor money
@@ -31,7 +35,21 @@ create table tb_exame(
 
 /* criar a tabela Paciente */
 create table tb_convenio(
-    numero int not null primary key,
+    cd_convenio int not null primary key,
     nome char(50),
     taxa money
 );
+
+/* *** RELACIONAMENTOS  *** */
+
+/* o Paciente realiza exames */
+alter table tb_paciente
+add constraint fk_exame foreign key(cd_exame)
+references  tb_exame (cd_exame)
+
+/* o Paciente possui convenio */
+alter table tb_paciente
+add constraint fk_convenio foreign key(cd_convenio)
+references tb_convenio (cd_convenio)
+
+
