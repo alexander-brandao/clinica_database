@@ -1,0 +1,132 @@
+Alexander Costa Brandão
+RA: 21709858
+
+/* DDL */
+/* criar banco de dados */
+create database db_clinica ;
+
+/*usar o banco */
+use db_clinica ;
+
+/* ***ENTIDADES*** */
+/* criar a tabela Paciente */
+create table tb_paciente(
+    cpf int not null primary key,
+    nome char(100),
+    telefone int,
+    email char(30),
+    dt_nascimento date,
+    cd_convenio int,
+    cd_exame int
+
+    ); 
+
+/* criar a tabela Paciente */
+create table tb_medico(
+    cd_medico int not null primary key,
+    crm int,
+    nome char(100),
+    telefone int,
+    email char(30),
+    especialidade  char(30)
+);
+
+
+/* criar a tabela Paciente */
+create table tb_exame(
+    cd_exame int not null primary key,
+    nome char(50),
+    descricao char(200),
+    valor decimal(15,2)
+);
+
+/* criar a tabela Paciente */
+create table tb_convenio(
+    cd_convenio int not null primary key,
+    nome char(50),
+    taxa decimal(15,2)
+);
+
+/* *** RELACIONAMENTOS  *** */
+
+/* o Paciente realiza exames */
+alter table tb_paciente
+add constraint fk_exame foreign key(cd_exame)
+references  tb_exame (cd_exame);
+
+/* o Paciente possui convenio */
+alter table tb_paciente
+add constraint fk_convenio foreign key(cd_convenio)
+references tb_convenio (cd_convenio);
+
+
+
+# INSERCAO DE DADOS
+
+
+#
+# ***Inserindo valores dentro das tabelas***
+#
+insert into tb_convenio 
+(cd_convenio, nome, taxa )
+values
+(1, 'Amil', 50),
+(2, 'Mais Saude', 30),
+(3, 'Porto Seguro', 20),
+(4, 'Go Care', 50),
+(5, 'Convenio Zé do caixao', 10);
+
+insert into tb_exame
+(cd_exame, nome, valor)
+values
+(1, 'Hemograma completo', 100),
+(2, 'Raio-x', 50),
+(3, 'Tomografia', 600),
+(4, 'Colesterol', 50),
+(5, 'fezes', 80),
+(6, 'Urina', 110); 
+
+# Inserindo pacientes
+insert into tb_paciente
+(cpf, nome, telefone, email, dt_nascimento, cd_convenio, cd_exame)
+values
+(726116370, 'José Almondega', 61999999, 'jose@gmail.com','1998-11-20', 1, 6),
+(156116370, 'Paulo Pint', 619885599, 'pint@gmail.com','1980-10-10', 3, 1),
+(516116370, 'Roriz Arruda', 61923399, 'arruda@gmail.com','2002-12-15', 2, 3),
+(126116371, 'Aristides Wife', 619395399, 'hotwife@gmail.com','2018-11-12' ,4, 4),
+(326116370, 'Marcio Terra Plana', 61999988, 'plana@gmail.com','1980-12-10', 5, 2);
+
+# Inserindo Medicos
+
+insert into tb_medico
+(cd_medico, crm, nome, telefone, email, especialidade)
+values
+(1, 2221, 'Joao Vacina', 61992384, 'joao@gmail.com', 'Dermatologista' ),
+(2, 1233, 'Maria Penicilina', 61962384, 'maria@gmail.com', 'cardiologista' ),
+(3, 3721, 'Tobias Comprimido', 61892384, 'tobias@gmail.com', 'neurologista' ),
+(4, 9221, 'Marcos Zero Gluten', 61772384, 'marcos@gmail.com', 'endocrinologista' ),
+(5, 7221, 'Angela Pomada', 61882384, 'pomada@gmail.com', 'urologista' );
+
+
+# OPERACOES E CONSULTAS
+
+#comando para consultar toda a tabela exame
+select * from tb_exame;
+
+#consultar tabela convenio
+select * from tb_paciente;
+
+# Mudar dados do medico
+update tb_medico
+set nome = 'Romario Curativo'
+where cd_medico = 1;
+
+#confirmar alteracao na tabela
+select * from tb_medico;
+
+# criando tabela teste para usar comando DROP
+create table teste
+(id int, nome char(20));
+
+# Apagando tabela teste
+drop table teste;
