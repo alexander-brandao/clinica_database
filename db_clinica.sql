@@ -1,7 +1,7 @@
 
 /* DDL */
 /* criar banco de dados */
-create db_clinica ;
+create database db_clinica ;
 
 /*usar o banco */
 use db_clinica ;
@@ -35,14 +35,14 @@ create table tb_exame(
     cd_exame int not null primary key,
     nome char(50),
     descricao char(200),
-    valor money
+    valor decimal(15,2)
 );
 
 /* criar a tabela Paciente */
 create table tb_convenio(
     cd_convenio int not null primary key,
     nome char(50),
-    taxa money
+    taxa decimal(15,2)
 );
 
 /* *** RELACIONAMENTOS  *** */
